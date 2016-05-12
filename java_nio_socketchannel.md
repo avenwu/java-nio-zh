@@ -2,6 +2,7 @@
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/socketchannel.html](http://tutorials.jenkov.com/java-nio/socketchannel.html)
 
+<!-- toc -->
 
 在Java NIO体系中，SocketChannel是用于TCP网络连接的套接字接口，相当于Java网络编程中的Socket套接字接口。创建SocketChannel主要有两种方式，如下：
   

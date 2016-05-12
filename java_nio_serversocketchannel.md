@@ -2,6 +2,8 @@
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/server-socket-channel.html](http://tutorials.jenkov.com/java-nio/server-socket-channel.html)
 
+<!-- toc -->
+
 在Java NIO中，ServerSocketChannel是用于监听TCP链接请求的通道，正如Java网络编程中的ServerSocket一样。ServerSocketChannel实现类位于java.nio.channels包下面。
 下面是一个示例程序：
 ```

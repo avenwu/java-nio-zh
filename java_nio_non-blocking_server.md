@@ -70,6 +70,26 @@ IO管道通常直接从流中（来自于socket活file的流）读取数据，�
 一个Message Reader自然是协议相关的。他需要知道message的格式以便读取。如果我们的服务器是跨协议复用的，那他必须实现Message Reader的协议-大致类似于接收一个Message Reader工厂作为配置参数。
 
 ## 存储不完整的Message（Storing Partial Messages）
+现在我们已经明确了由Message Reader负责不完整消息的存储直到接收到完整的消息。闲杂我们还需要知道这个存储过程需要如何来实现。
+
+在设计的时候我们需要考虑两个关键因素：
+1. 我们希望在拷贝消息数据的时候数据量能尽可能的小，拷贝量越大则性能相对越低；
+2. 我们希望完整的消息是以顺序的字节存储，这样方便进行数据的解析；
+
+### 为每个Message Reade分配Buffer（A Buffer Per Message Reader）
+显然不完整的消息数据需要存储在某种buffer中。比较直接的办法是我们为每个Message Reader都分配一个内部的buffer成员。但是，多大的buffer才合适呢？这个buffer必须能存储下一个message最大的大小。如果一个message最大是1MB，那每个Message Reader内部的buffer就至少有1MB大小。
+
+在百万级别的并发链接数下，1MB的buffer基本没法正常工作。举例来说，1,000,000 x 1MB就是1TB的内存大小！如果消息的最大数据量是16MB又需要多少内存呢？128MB呢？
+
+### 可伸缩Buffer（Resizable Buffers）
+另一个方案是在每个Message Reader内部维护一个容量可变的buffer。一个可变的buffer在初始化时占用较少控件，在消息变得很大超出容量时自动扩容。这样每个链接就不需要都占用比如1MB的空间。每个链接只使用承载下一个消息所必须的内存大小。
+
+要实现一个可伸缩的buffer有几种不同的办法。每一种都有它的优缺点，下面几个小结我会逐一讨论它们。
+
+### 拷贝时自动扩容（Resize by Copy）
+
+### 追加时扩容（Resize by Append）
+
 
 
 

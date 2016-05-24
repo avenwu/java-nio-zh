@@ -163,5 +163,18 @@ TLV编码使得内存管理更加简单，这也是HTTP1.1协议让人觉得是�
 * 处理数据管道，负责处理接收到的完整消息；
 * 写数据管道，用于检查是否有数据可以写入打开的连接中；
 
-这三个管道在循环中重复执行。可以优化执行。里
+这三个管道在循环中重复执行。你可以尝试优化它的执行。比如，如果没有消息在队列中等候，那么可以跳过写数据管道。或者，如果没有收到新的完整消息，你甚至可以跳过处理数据管道。
+
+下面这张流程图阐述了这整个服务器循环过程：
+![non-blocking-server-9.png](http://tutorials.jenkov.com/images/java-nio/non-blocking-server-9.png)
+
+假如你还是柑橘这比较复杂难懂，可以去clone我们的源码仓：
+[https://github.com/jjenkov/java-nio-server](https://github.com/jjenkov/java-nio-server)
+也许亲眼看到了代码会帮助你理解这一块是如何实现的。
+
+## 服务器线程模型（Server Thread Model）
+我们在GitHub上的源码中实现的非阻塞IO服务使用了一个包含两条线程的线程模型。第一个线程负责从ServerSocketChannel接收到达的链接。另一个线程负责处理这些链接，包括读消息，处理消息，把响应写回到链接。这个双线程模型如下：
+![non-blocking-server-10.png](http://tutorials.jenkov.com/images/java-nio/non-blocking-server-10.png)
+前一节中已经介绍过的服务器的循环处理在处理线程中执行。
+
 

@@ -23,7 +23,28 @@ channel.socket().bind(new InetSocketAddress(9999));
 ByteBuffer buf = ByteBuffer.allocate(48);
 buf.clear();
 
-**channel.receive(buf);
-**
+**channel.receive(buf);**
 ```
-receive()方法会把接收到的数据包中的数据拷贝至给定的Buffer中。如果数据包的内容超过了Buffer的大小。
+receive()方法会把接收到的数据包中的数据拷贝至给定的Buffer中。如果数据包的内容超过了Buffer的大小，剩余的数据会被直接丢弃。
+
+## 发送数据（Sending Data）
+发送数据是通过DatagramChannel的send()方法：
+```
+String newData = "New String to wrte to file..."               +System.currentTimeMillis();
+ByteBuffer buf = ByteBuffer.allocate(48);
+buf.clear();
+buf.put(newData.getBytes());
+buf.flip();
+
+**int byteSent = channel.send(buf, new InetSocketAddress("jenkov.com", 80));**
+```
+上述示例会吧一个字符串发送到“jenkov.com”服务器的UDP端口80.目前这个端口没有被任何程序监听，所以什么都不会发生。当发送了数据后，我们不会收到数据包是否被接收的的通知，这是由于UDP本身不保证任何数据的发送问题。
+
+## 链接特定机器地址（Connecting to a Specific Address）
+DatagramChannel实际上是可以指定到网络中的特定地址的。由于UDP是面向无连接的，这种链接方式并不会创建实际的连接，这和TCP通道类似。确切的说，他会锁定DatagramChannel,这样我们就只能通过特定的地址来收发数据包。
+
+看一个例子先：
+```
+channel.connect(new InetSocketAddress("jenkov.com"), 80));
+```
+当连接上后，可以开始read()和Writer()，如果我们使用老款的登录

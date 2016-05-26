@@ -47,4 +47,11 @@ DatagramChannel实际上是可以指定到网络中的特定地址的。由于UD
 ```
 channel.connect(new InetSocketAddress("jenkov.com"), 80));
 ```
-当连接上后，可以开始read()和Writer()，如果我们使用老款的登录
+当连接上后，可以向使用传统的通道那样调用read()和Writer()方法。区别是数据的读写情况得不到保证。下面是几个示例：
+```
+int bytesRead = channel.read(buf);    
+```
+
+```
+int bytesWritten = channel.write(buf);
+```

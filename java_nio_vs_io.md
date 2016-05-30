@@ -65,7 +65,13 @@ String phoneLine  = reader.readLine();
 ```
 
 ## 小结
+NIO允许我们只用一条线程来管理多个通道（网络连接或文件），随之而来的代价是解析数据相对于阻塞流来说可能会变得更加的复杂。
 
+如果你需要同时管理成千上万的链接，这些链接只发送少量数据，例如聊天服务器，用NIO来实现这个服务器是有优势的。类似的，如果你需要维持大量的链接，例如P2P网络，用单线程来管理这些
+链接也是有优势的。这种单线程多连接的设计可以用下图描述：
+![nio-vs-io-3.png](http://tutorials.jenkov.com/images/java-nio/nio-vs-io-3.png)
+**Java NIO: A single thread managing multiple connections**
 
-
-
+如果链接数不是很多，但是每个链接的占用较大带宽，每次都要发送大量数据，那么使用传统的IO设计服务器可能是最好的选择。下面是经典IO服务设计图：
+![nio-vs-io-4.png](http://tutorials.jenkov.com/images/java-nio/nio-vs-io-4.png)
+**Java IO: A classic IO server design - one connection handled by one thread.**

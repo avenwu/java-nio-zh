@@ -2,6 +2,8 @@
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/nio-vs-io.html](http://tutorials.jenkov.com/java-nio/nio-vs-io.html)
 
+<!-- toc -->
+
 当学习Java的NIO和IO时，有个问题会跳入脑海当中：什么时候该用IO，什么时候用NIO？
 
 下面的章节中笔者会试着分享一些线索，包括两者之间的区别，使用场景以及他们是如何影响代码设计的。

@@ -7,5 +7,5 @@
 * [12. Java NIO DatagramChannel](java_nio_datagramchannel.md)
 * [13. Java NIO Pipe](java_nio_pipe.md)
 * [14. Java NIO vs. IO](java_nio_vs_io.md)
-* [Java NIO Path](java_nio_path.md)
+* [15. Java NIO Path](java_nio_path.md)
 

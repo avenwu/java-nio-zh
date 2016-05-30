@@ -28,6 +28,26 @@ public classs PathExample {
 其次注意Paths.get("c:\\data\\myfile.txt")的调用。这个方法会创建一个Path实例，换句话说Paths.get()是Paths的一个工厂方法。
 
 ### 创建绝对路径（Creating an Absolute Path）
+创建绝对路径只需要调动Paths.get()这个工厂方法，同时传入绝对文件。这是一个例子：
+```
+Path path = Paths.get("c:\\data\\myfile.txt");
+```
+对路径是c:\data\myfile.txt，里面的双斜杠\字符是Java 字符串中必须的，因为\是转义字符，表示后面跟的字符在字符串中的真实含义。双斜杠\\表示\自身。
+
+上面的路径是Windows下的文件系统路径表示。在Unixx系统中（Linux, MacOS,FreeBSD等）上述的绝对路径长得是这样的：
+```
+Path path = Paths.get("/home/jakobjenkov/myfile.txt");
+```
+他的绝对路径是/home/jakobjenkov/myfile.txt。
+如果在Windows机器上使用用这种路径，那么这个路径会被认为是相对于当前磁盘的。例如：
+
+```
+/home/jakobjenkov/myfile.txt
+```
+这个路径会被理解其C盘上的文件，所以路径又变成了
+```
+C:/home/jakobjenkov/myfile.txt
+```
 
 ### 创建相对路径（Creating a Relative Path）
 

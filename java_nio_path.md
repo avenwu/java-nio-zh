@@ -50,5 +50,65 @@ C:/home/jakobjenkov/myfile.txt
 ```
 
 ### 创建相对路径（Creating a Relative Path）
+相对路径是从一个路径（基准路径）指向另一个目录或文件的路径。完整路径实际上等同于相对路径加上基准路径。
+
+Java NIO的Path类可以用于相对路径。创建一个相对路径可以通过调用Path.get(basePath, relativePath),下面是一个示例：
+
+```
+Path projects = Paths.get("d:\\data", "projects");
+
+Path file     = Paths.get("d:\\data", "projects\\a-project\\myfile.txt");
+```
+第一行创建了一个指向d:\data\projects的Path实例。第二行创建了一个指向d:\data\projects\a-project\myfile.txt的Path实例。
+在使用相对路径的时候有两个特殊的符号：
+
+  * .
+  * ..
+
+.表示的是当前目录，例如我们可以这样创建一个相对路径：
+```
+Path currentDir = Paths.get(".");
+System.out.println(currentDir.toAbsolutePath());
+```
+currentDir的实际路径就是当前代码执行的目录。
+如果在路径中间使用了.那么他的含义实际上就是目录位置自身，例如：
+```
+Path currentDir = Paths.get("d:\\data\\projects\.\a-project");
+```
+上诉路径等同于：
+```
+d:\data\projects\a-project
+```
+
+..表示父目录或者说是上一级目录：
+```
+Path parentDir = Paths.get("..");
+```
+这个Path实例指向的目录是当前程序代码的父目录。
+如果在路径中间使用..那么会相应的改变指定的位置：
+```
+String path = "d:\\data\\projects\\a-project\\..\\another-project";
+Path parentDir2 = Paths.get(path);
+```
+这个路径等同于：
+```
+d:\data\projects\another-project
+```
+.和..也可以结合起来用，这里不过多介绍。
 
 ## Path.normalize()
+Path的normalize()方法可以把路径规范化。也就是把.和..都等价去除：
+```
+String originalPath = "d:\\data\\projects\\a-project\\..\\another-project";
+
+Path path1 = Paths.get(originalPath);
+System.out.println("path1 = " + path1);
+
+Path path2 = path1.normalize();
+System.out.println("path2 = " + path2);
+```
+这段代码的输出如下：
+```
+path1 = d:\data\projects\a-project\..\another-project
+path2 = d:\data\projects\another-project
+```

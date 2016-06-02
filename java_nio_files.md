@@ -52,14 +52,74 @@ try {
 ```
 这个例子当中，首先创建了原文件和目标文件的Path实例。然后把它们作为参数，传递给Files.copy(),接着就会进行文件拷贝。
 如果目标文件已经存在，就会抛出java.nio.file.FileAlreadyExistsException异常。类似的吐过中间出错了，也会抛出IOException。
-### Overwriting Existing Files
+### 覆盖已经存在的文件(Overwriting Existing Files)
+copy操作可以强制覆盖已经存在的目标文件。下面是具体的示例：
+```
+Path sourcePath      = Paths.get("data/logging.properties");
+Path destinationPath = Paths.get("data/logging-copy.properties");
 
+try {
+    Files.copy(sourcePath, destinationPath,
+            StandardCopyOption.REPLACE_EXISTING);
+} catch(FileAlreadyExistsException e) {
+    //destination file already exists
+} catch (IOException e) {
+    //something else went wrong
+    e.printStackTrace();
+}
+```
+注意copy方法的第三个参数，这个参数决定了是否可以覆盖文件。
 ## Files.move()
+Java NIO的Files类也包含了移动的文件的接口。移动文件和重命名是一样的，但是还会改变文件的目录位置。java.io.File类中的renameTo()方法与之功能是一样的。
+```
+Path sourcePath      = Paths.get("data/logging-copy.properties");
+Path destinationPath = Paths.get("data/subdir/logging-moved.properties");
+
+try {
+    Files.move(sourcePath, destinationPath,
+            StandardCopyOption.REPLACE_EXISTING);
+} catch (IOException e) {
+    //moving file failed.
+    e.printStackTrace();
+}
+```
+首先创建源路径和目标路径的，原路径指的是需要移动的文件的初始路径，目标路径是指需要移动到的位置。
+这里move的第三个参数也允许我们覆盖已有的文件。
 
 ## Files.delete()
+Files.delete()方法可以删除一个文件或目录：
+```
+Path path = Paths.get("data/subdir/logging-moved.properties");
 
+try {
+    Files.delete(path);
+} catch (IOException e) {
+    //deleting file failed
+    e.printStackTrace();
+}
+```
+首先创建需要删除的文件的path对象。接着就可以调用delete了。
 ## Files.walkFileTree()
+Files.walkFileTree()方法具有递归遍历目录的功能。walkFileTree接受一个Path和FileVisitor作为参数。Path对象是需要遍历的目录，FileVistor则会在每次遍历中被调用。
+下面先来看一下FileVisitor这个接口的定义：
+```
+public interface FileVisitor {
 
+    public FileVisitResult preVisitDirectory(
+        Path dir, BasicFileAttributes attrs) throws IOException;
+
+    public FileVisitResult visitFile(
+        Path file, BasicFileAttributes attrs) throws IOException;
+
+    public FileVisitResult visitFileFailed(
+        Path file, IOException exc) throws IOException;
+
+    public FileVisitResult postVisitDirectory(
+        Path dir, IOException exc) throws IOException {
+
+}
+```
+FileVisitor需要调用方自行实现，然后作为参数传入walkFileTree().
 ### Searching For Files
 ### Deleting Directies Recursively
 

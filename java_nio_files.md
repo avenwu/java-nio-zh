@@ -119,8 +119,53 @@ public interface FileVisitor {
 
 }
 ```
-FileVisitor需要调用方自行实现，然后作为参数传入walkFileTree().
+FileVisitor需要调用方自行实现，然后作为参数传入walkFileTree().FileVisitor的每个方法会在遍历过程中被调用多次。如果不需要处理每个方法，那么可以继承他的默认实现类SimpleFileVisitor，它将所有的接口做了空实现。
+下面看一个walkFileTree()的示例：
+```
+Files.walkFileTree(path, new FileVisitor<Path>() {
+  @Override
+  public FileVisitResult preVisitDirectory(Path dir, BasicFileAttributes attrs) throws IOException {
+    System.out.println("pre visit dir:" + dir);
+    return FileVisitResult.CONTINUE;
+  }
+
+  @Override
+  public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+    System.out.println("visit file: " + file);
+    return FileVisitResult.CONTINUE;
+  }
+
+  @Override
+  public FileVisitResult visitFileFailed(Path file, IOException exc) throws IOException {
+    System.out.println("visit file failed: " + file);
+    return FileVisitResult.CONTINUE;
+  }
+
+  @Override
+  public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+    System.out.println("post visit directory: " + dir);
+    return FileVisitResult.CONTINUE;
+  }
+});
+```
+FileVisitor的方法会在不同时机被调用：
+preVisitDirectory()在访问目录前被调用。postVisitDirectory()在访问后调用。
+visitFile()会在整个遍历过程中的每次访问文件都被调用。他不是针对目录的，而是针对文件的。visitFileFailed()调用则是在文件访问失败的时候。例如，当缺少合适的权限或者其他错误。
+上述四个方法都返回一个FileVisitResult枚举对象。具体的可选枚举项包括：
+
+* CONTINUE
+* TERMINATE
+* SKIP_SIBLINGS
+* SKIP_SUBTREE
+
+返回这个枚举值可以让调用方决定文件遍历是否需要继续。
+CONTINE表示文件遍历和正常情况下一样继续。
+TERMINATE表示文件访问需要终止。
+SKIP_SIBLINGS表示文件访问继续，但是不需要访问其他同级文件或目录。
+SKIP_SUBTREE表示继续访问，但是不需要访问该目录下的子目录。这个枚举值仅在preVisitDirectory()中返回才有效。如果在另外几个方法中返回，那么会被理解为CONTINE。
+
 ### Searching For Files
+
 ### Deleting Directies Recursively
 
 ## Additional Methods in the Files Class

@@ -165,7 +165,54 @@ SKIP_SIBLINGS表示文件访问继续，但是不需要访问其他同级文件�
 SKIP_SUBTREE表示继续访问，但是不需要访问该目录下的子目录。这个枚举值仅在preVisitDirectory()中返回才有效。如果在另外几个方法中返回，那么会被理解为CONTINE。
 
 ### Searching For Files
+下面看一个例子，我们通过walkFileTree()来寻找一个README.txt文件：
+```
+Path rootPath = Paths.get("data");
+String fileToFind = File.separator + "README.txt";
 
+try {
+  Files.walkFileTree(rootPath, new SimpleFileVisitor<Path>() {
+    
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+      String fileString = file.toAbsolutePath().toString();
+      //System.out.println("pathString = " + fileString);
+
+      if(fileString.endsWith(fileToFind)){
+        System.out.println("file found at path: " + file.toAbsolutePath());
+        return FileVisitResult.TERMINATE;
+      }
+      return FileVisitResult.CONTINUE;
+    }
+  });
+} catch(IOException e){
+    e.printStackTrace();
+}
+```
 ### Deleting Directies Recursively
+Files.walkFileTree()也可以用来删除一个目录以及内部的所有文件和子目。Files.delete()只用用于删除一个空目录。我们通过遍历目录，然后在visitFile()接口中三次所有文件，最后在postVisitDirectory()内删除目录本身。
+```
+Path rootPath = Paths.get("data/to-delete");
 
+try {
+  Files.walkFileTree(rootPath, new SimpleFileVisitor<Path>() {
+    @Override
+    public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+      System.out.println("delete file: " + file.toString());
+      Files.delete(file);
+      return FileVisitResult.CONTINUE;
+    }
+
+    @Override
+    public FileVisitResult postVisitDirectory(Path dir, IOException exc) throws IOException {
+      Files.delete(dir);
+      System.out.println("delete dir: " + dir.toString());
+      return FileVisitResult.CONTINUE;
+    }
+  });
+} catch(IOException e){
+  e.printStackTrace();
+}
+```
 ## Additional Methods in the Files Class
+java.nio.file.Files类还有其他一些很有用的方法，比如创建符号链接，确定文件大小以及设置文件权限等。具体用法可以查阅JavaDoc中的API说明。

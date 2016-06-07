@@ -68,10 +68,66 @@ fileChannel.read(buffer, position, buffer, new CompletionHandler<Integer, ByteBu
 });
 ```
 这里，一旦读取完成，将会触发CompletionHandler的completed()方法，并传入一个Integer和ByteBuffer。前面的整形表示的是读取到的字节数大小。第二个ByteBuffer也可以换成其他合适的对象方便数据写入。
-如果读取操作失败了，那么会触发faile()方法。
+如果读取操作失败了，那么会触发failed()方法。
 ## 写数据（Writing Data）
+和读数据类似某些数据也有两种方式，调动不同的的write()方法，下面分别看介绍这两种方法。
 
 ### 通过Future写数据（Writing Data Via a Future）
+通过AsynchronousFileChannel我们可以一步写数据
+```
+Path path = Paths.get("data/test-write.txt");
+AsynchronousFileChannel fileChannel = 
+    AsynchronousFileChannel.open(path, StandardOpenOption.WRITE);
 
+ByteBuffer buffer = ByteBuffer.allocate(1024);
+long position = 0;
+
+buffer.put("test data".getBytes());
+buffer.flip();
+
+Future<Integer> operation = fileChannel.write(buffer, position);
+buffer.clear();
+
+while(!operation.isDone());
+
+System.out.println("Write done");
+```
+首先把文件已写方式打开，接着创建一个ByteBuffer座位写入数据的目的地。再把数据进入ByteBuffer。最后检查一下是否写入完成。
+需要注意的是，这里的文件必须是已经存在的，否者在尝试write数据是会抛出一个java.nio.file.NoSuchFileException.
+检查一个文件是否存在可以通过下面的方法：
+```
+if(!Files.exists(path)){
+    Files.createFile(path);
+}
+```
 ### 通过CompletionHandler写数据（Writing Data Via a CompletionHandler）
+我们也可以通过CompletionHandler来写数据：
+```
+Path path = Paths.get("data/test-write.txt");
+if(!Files.exists(path)){
+    Files.createFile(path);
+}
+AsynchronousFileChannel fileChannel = 
+    AsynchronousFileChannel.open(path, StandardOpenOption.WRITE);
 
+ByteBuffer buffer = ByteBuffer.allocate(1024);
+long position = 0;
+
+buffer.put("test data".getBytes());
+buffer.flip();
+
+fileChannel.write(buffer, position, buffer, new CompletionHandler<Integer, ByteBuffer>() {
+
+    @Override
+    public void completed(Integer result, ByteBuffer attachment) {
+        System.out.println("bytes written: " + result);
+    }
+
+    @Override
+    public void failed(Throwable exc, ByteBuffer attachment) {
+        System.out.println("Write failed");
+        exc.printStackTrace();
+    }
+});
+```
+同样当数据吸入完成后completed()会被调用，如果失败了那么failed()会被调用。

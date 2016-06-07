@@ -3,6 +3,8 @@
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/index.html](http://tutorials.jenkov.com/java-nio/index.html)
 
+<!-- toc -->
+
 Java NIO是java 1.4之后新出的一台新的IO接口，这里的的新是相对于原有标准的Java IO和Java Networking接口。NIO提供了一种完全不同的操作方式。
 
 > NIO中的N可以理解为Non-blocking，不单纯是New

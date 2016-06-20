@@ -2,6 +2,8 @@
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/channels.html](http://tutorials.jenkov.com/java-nio/channels.html)
 
+<!-- toc -->
+
 Java NIO Channel通道和流非常相似，主要有以下几点区别：
 
 * 通道可以度也可以写，流一般来说是单向的（只能读或者写）。

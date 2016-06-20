@@ -13,5 +13,5 @@
 * [15. Java NIO Path](java_nio_path.md)
 * [16. Java NIO Files](java_nio_files.md)
 * [17. Java NIO AsynchronousFileChannel](java_nio_asynchronousfilechannel.md)
-* 04. Java NIO Buffer
+* [04. Java NIO Buffer](java_nio_buffer.md)
 

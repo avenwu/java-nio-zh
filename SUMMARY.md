@@ -3,6 +3,7 @@
 * [Introduction](README.md)
 * [01. Java NIO Tutorial](01_java_nio_tutorial.md)
 * [02. Java NIO Overview](java_nio_overview.md)
+* [03. Java NIO Channel](java_nio_channel.md)
 * [09. Java NIO SocketChannel](java_nio_socketchannel.md)
 * [10. Java NIO ServerSocketChannel](java_nio_serversocketchannel.md)
 * [11. Java NIO: Non-blocking Server](java_nio_non-blocking_server.md)
@@ -12,5 +13,4 @@
 * [15. Java NIO Path](java_nio_path.md)
 * [16. Java NIO Files](java_nio_files.md)
 * [17. Java NIO AsynchronousFileChannel](java_nio_asynchronousfilechannel.md)
-* [03. Java NIO Channel](java_nio_channel.md)
 

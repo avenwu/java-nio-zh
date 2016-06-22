@@ -14,5 +14,5 @@
 * [15. Java NIO Path](java_nio_path.md)
 * [16. Java NIO Files](java_nio_files.md)
 * [17. Java NIO AsynchronousFileChannel](java_nio_asynchronousfilechannel.md)
-* 05. Java NIO Scatter / Gather
+* [05. Java NIO Scatter / Gather](java_nio_scatter__gather.md)
 

@@ -15,4 +15,5 @@
 * [15. Java NIO Path](java_nio_path.md)
 * [16. Java NIO Files](java_nio_files.md)
 * [17. Java NIO AsynchronousFileChannel](java_nio_asynchronousfilechannel.md)
+* 06. Java NIO Channel to Channel Transfers
 

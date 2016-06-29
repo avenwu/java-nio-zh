@@ -73,7 +73,13 @@ boolean isInterestedInWrite   = interestSet & SelectionKey.OP_WRITE;
 ```
 int readySet = selectionKey.readyOps();
 ```
-从“就绪集合”中取值的操作类似月“关注集合”的操作，当然还有更简单的方法，SelectionKey提供了一系列返回值为boolean的的方法。
+从“就绪集合”中取值的操作类似月“关注集合”的操作，当然还有更简单的方法，SelectionKey提供了一系列返回值为boolean的的方法：
+```
+selectionKey.isAcceptable();
+selectionKey.isConnectable();
+selectionKey.isReadable();
+selectionKey.isWritable();
+```
 ### Channel + Selector
 
 ### Attaching Objects

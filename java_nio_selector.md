@@ -3,6 +3,8 @@
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/selectors.html](http://tutorials.jenkov.com/java-nio/selectors.html)
 
+<!-- toc -->
+
 Selector是Java NIO中的一个组件，用于检查一个或多个NIO Channel的状态是否处于可读、可写。如此可以实现单线程管理多个channels,也就是可以管理多个网络链接。
 ## 为什么使用Selector（Why Use a Selector?）
 用单线程处理多个channels的好处是我需要更少的线程来处理channel。实际上，你甚至可以用一个线程来处理所有的channels。从操作系统的角度来看，切换线程开销是比较昂贵的，并且每个线程都需要占用系统资源，因此暂用线程越少越好。
@@ -81,15 +83,116 @@ selectionKey.isReadable();
 selectionKey.isWritable();
 ```
 ### Channel + Selector
-
+从SelectionKey操作Channel和Selector非常简单：
+```
+Channel  channel  = selectionKey.channel();
+Selector selector = selectionKey.selector();    
+```
 ### Attaching Objects
+我们可以给一个SelectionKey附加一个Object，这样做一方面可以方便我们识别某个特定的channel，同时也增加了channel相关的附加信息。例如，可以把用于channel的buffer附加到SelectionKey上：
+```
+selectionKey.attach(theObject);
 
-## Selecting Channels via a Selector
+Object attachedObj = selectionKey.attachment();
+```
+附加对象的操作也可以在register的时候就执行：
+```
+SelectionKey key = channel.register(selector, SelectionKey.OP_READ, theObject);
+```
+## 从Selector中选择channel(Selecting Channels via a Selector)
+一旦我们向Selector注册了一个或多个channel后，就可以调用select来获取channel。select方法会返回所有处于就绪状态的channel。
+select方法具体如下：
 
+* int select()
+* int select(long timeout)
+* int selectNow()
+
+select()方法在返回channel之前处于阻塞状态。
+select(long timeout)和select做的事一样，不过他的阻塞有一个超时限制。
+selectNow()不会阻塞，根据当前状态立刻返回合适的channel。
+
+select()方法的返回值是一个int整形，代表有多少channel处于就绪了。也就是自上一次select后有多少channel进入就绪。举例来说，假设第一次调用select时正好有一个channel就绪，那么返回值是1，并且对这个channel做任何处理，接着再次调用select，此时恰好又有一个新的channel就绪，那么返回值还是1，现在我们一共有两个channel处于就绪，但是在每次调用select时只有一个channel是就绪的。
+ 
 ### selectedKeys()
+在调用select并返回了有channel就绪之后，可以通过选中的key集合来获取channel，这个操作通过调用selectedKeys()方法：
+```
+Set<SelectionKey> selectedKeys = selector.selectedKeys();    
+```
+还记得在register时的操作吧，我们register后的返回值就是SelectionKey实例，也就是我们现在通过selectedKeys()方法所返回的SelectionKey。
 
+遍历这些SelectionKey可以通过如下方法：
+```
+Set<SelectionKey> selectedKeys = selector.selectedKeys();
+
+Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
+
+while(keyIterator.hasNext()) {
+    
+    SelectionKey key = keyIterator.next();
+
+    if(key.isAcceptable()) {
+        // a connection was accepted by a ServerSocketChannel.
+
+    } else if (key.isConnectable()) {
+        // a connection was established with a remote server.
+
+    } else if (key.isReadable()) {
+        // a channel is ready for reading
+
+    } else if (key.isWritable()) {
+        // a channel is ready for writing
+    }
+
+    keyIterator.remove();
+}
+```
+上述循环会迭代key集合，针对每个key我们单独判断他是处于何种就绪状态。
+注意keyIterater.remove()方法的调用，Selector本身并不会移除SelectionKey对象，这个操作需要我们收到执行。当下次channel处于就绪是，Selector任然会吧这些key再次加入进来。
+
+SelectionKey.channel返回的channel实例需要强转为我们实际使用的具体的channel类型，例如ServerSocketChannel或SocketChannel.
 ## wakeUp()
-
+y由于调用select而被阻塞的线程，可以通过调用Selector.wakeup()来唤醒即便此时已然没有channel处于就绪状态。具体操作是，在另外一个线程调用wakeup，被阻塞与select方法的线程就会立刻返回。
 ## close()
+当操作Selector完毕后，需要调用close方法。close的调用会关闭Selector并使相关的SelectionKey都无效。channel本身不管被关闭。
+## 完整的Selector案例(Full Selector Example)
+这有一个完整的案例，首先打开一个Selector,然后注册channel，最后锦亭Selector的状态：
+```
+Selector selector = Selector.open();
 
-## Full Selector Example
+channel.configureBlocking(false);
+
+SelectionKey key = channel.register(selector, SelectionKey.OP_READ);
+
+
+while(true) {
+
+  int readyChannels = selector.select();
+
+  if(readyChannels == 0) continue;
+
+
+  Set<SelectionKey> selectedKeys = selector.selectedKeys();
+
+  Iterator<SelectionKey> keyIterator = selectedKeys.iterator();
+
+  while(keyIterator.hasNext()) {
+
+    SelectionKey key = keyIterator.next();
+
+    if(key.isAcceptable()) {
+        // a connection was accepted by a ServerSocketChannel.
+
+    } else if (key.isConnectable()) {
+        // a connection was established with a remote server.
+
+    } else if (key.isReadable()) {
+        // a channel is ready for reading
+
+    } else if (key.isWritable()) {
+        // a channel is ready for writing
+    }
+
+    keyIterator.remove();
+  }
+}
+```

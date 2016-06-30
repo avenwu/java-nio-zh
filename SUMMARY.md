@@ -16,6 +16,6 @@
 * [13. Java NIO Pipe](java_nio_pipe.md)
 * [14. Java NIO vs. IO](java_nio_vs_io.md)
 * [15. Java NIO Path](java_nio_path.md)
-* [17. Java NIO AsynchronousFileChannel](java_nio_asynchronousfilechannel.md)
 * [16. Java NIO Files](java_nio_files.md)
+* [17. Java NIO AsynchronousFileChannel](java_nio_asynchronousfilechannel.md)
 

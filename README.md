@@ -7,6 +7,8 @@
 
 翻译系列暂定名为《Java NIO 简明教程》。
 
+![cover](cover.jpg)
+
 
 版本 | 修订时间
 ------------ | -------------
@@ -17,4 +19,3 @@ v1.0 | 2016/05/11
 
 * 作者：<info@jenkov.com>
 * 译者：<me@avenwu.net> @[小文字](https://github.com/avenwu)
-

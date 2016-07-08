@@ -11,8 +11,11 @@ Scatter/gather在有些场景下会非常有用，比如需要处理多份分开
 
 ## Scattering Reads
 "scattering read"是把数据从单个Channel写入到多个buffer，下面是示意图：
+
 ![scatter.png](http://tutorials.jenkov.com/images/java-nio/scatter.png)
+
 **Java NIO: Scattering Read**
+
 用代码来表示的话如下：
 ```
 ByteBuffer header = ByteBuffer.allocate(128);

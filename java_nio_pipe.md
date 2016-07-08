@@ -6,7 +6,9 @@
 一个Java NIO的管道是两个线程间单向传输数据的连接。一个管道（Pipe）有一个source channel和一个sink channel(没想到合适的中文名)。我们把数据写到sink channel中，这些数据可以同过source channel再读取出来。
 
 下面是一个管道的示意图：
+
 ![http://tutorials.jenkov.com/images/java-nio/pipe-internals.png](http://tutorials.jenkov.com/images/java-nio/pipe-internals.png)
+
 ## 创建管道(Creating a Pipe)
 打开一个管道通过调用Pipe.open()工厂方法，如下：
 ```

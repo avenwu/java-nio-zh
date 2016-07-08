@@ -12,8 +12,11 @@ Selector是Java NIO中的一个组件，用于检查一个或多个NIO Channel�
 需要留意的是，现代操作系统和CPU在多任务处理上已经变得越来越好，所以多线程带来的影响也越来越小。如果一个CPU是多核的，如果不执行多任务反而是浪费了机器的性能。不过这些设计讨论是另外的话题了。简而言之，通过Selector我们可以实现单线程操作多个channel。
 
 这有一幅示意图，描述了单线程处理三个channel的情况：
+
 ![overview-selectors.png](http://tutorials.jenkov.com/images/java-nio/overview-selectors.png)
+
 **Java NIO: A Thread uses a Selector to handle 3 Channel's**
+
 ## 创建Selector(Creating a Selector)
 创建一个Selector可以通过Selector.open()方法：
 ```

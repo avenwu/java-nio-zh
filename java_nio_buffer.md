@@ -54,7 +54,9 @@ buffer缓冲区实质上就是一块内存，用于写入数据，也供后续�
 position和limit的具体含义取决于当前buffer的模式。capacity在两种模式下都表示容量。
 下面有张示例图，描诉了不同模式下position和limit的含义：
 
+
 ![buffers-modes.png](http://tutorials.jenkov.com/images/java-nio/buffers-modes.png)
+
 **Buffer capacity, position and limit in write and read mode.**
 
 ### 容量（Capacity）

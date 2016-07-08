@@ -16,4 +16,4 @@ v1.1 | 2016/07/07
 ## 联系
 
 * 作者：<info@jenkov.com>
-* 译者：<me@avenwu.net> @[小文字](https://github.com/avenwu)
+* 译者：<me@avenwu.net> @[小文子](https://github.com/avenwu)

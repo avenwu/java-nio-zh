@@ -1,4 +1,4 @@
-# 10. Java NIO ServerSocketChannel
+# 10. Java NIO ServerSocketChannel服务端套接字通道
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/server-socket-channel.html](http://tutorials.jenkov.com/java-nio/server-socket-channel.html)
 

@@ -1,4 +1,4 @@
-# 09. Java NIO SocketChannel
+# 09. Java NIO SocketChannel套接字通道
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/socketchannel.html](http://tutorials.jenkov.com/java-nio/socketchannel.html)
 

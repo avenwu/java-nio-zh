@@ -4,7 +4,7 @@
 * [01. Java NIO 教程](java-nio-tutorial.md)
 * [02. Java NIO 概览](java-nio-overview.md)
 * [03. Java NIO Channel通道](java-nio-channel.md)
-* [04. Java NIO Buffer](java-nio-buffer.md)
+* [04. Java NIO Buffer缓冲区](java-nio-buffer.md)
 * [05. Java NIO Scatter / Gather](java-nio-scatter-gather.md)
 * [06. Java NIO Channel to Channel Transfers](java-nio-channel-to-channel-transfers.md)
 * [07. Java NIO Selector](java-nio-selector.md)

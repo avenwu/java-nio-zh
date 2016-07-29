@@ -13,7 +13,7 @@
 * [10. Java NIO ServerSocketChannel](java-nio-serversocketchannel.md)
 * [11. Java NIO: Non-blocking Server非阻塞服务器](java-nio-non-blocking-server.md)
 * [12. Java NIO DatagramChannel](java-nio-datagramchannel.md)
-* [13. Java NIO Pipe](java-nio-pipe.md)
+* [13. Java NIO Pipe管道](java-nio-pipe.md)
 * [14. Java NIO vs. IO](java-nio-vs-io.md)
 * [15. Java NIO Path](java-nio-path.md)
 * [16. Java NIO Files](java-nio-files.md)

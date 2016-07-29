@@ -7,7 +7,7 @@ Java NIO发布时内置了对scatter / gather的支持。scatter / gather是通�
 
 Scattering read指的是从通道读取的操作能把数据写入多个buffer，也就是sctters代表了数据从一个channel到多个buffer的过程。
 
-gathering write则正好相反，表示的是从多个buffer把数据写入到一个channel钟。
+gathering write则正好相反，表示的是从多个buffer把数据写入到一个channel中。
 
 Scatter/gather在有些场景下会非常有用，比如需要处理多份分开传输的数据。举例来说，假设一个消息包含了header和body，我们可能会把header和body保存在不同独立buffer中，这种分开处理header与body的做法会使开发更简明。
 

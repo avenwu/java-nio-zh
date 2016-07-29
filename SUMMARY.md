@@ -1,7 +1,7 @@
 # Summary
 
 * [简介](README.md)
-* [01. Java NIO Tutorial](java-nio-tutorial.md)
+* [01. Java NIO 教程](java-nio-tutorial.md)
 * [02. Java NIO Overview](java-nio-overview.md)
 * [03. Java NIO Channel](java-nio-channel.md)
 * [04. Java NIO Buffer](java-nio-buffer.md)

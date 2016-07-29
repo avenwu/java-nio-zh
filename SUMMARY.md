@@ -6,7 +6,7 @@
 * [03. Java NIO Channel通道](java-nio-channel.md)
 * [04. Java NIO Buffer缓冲区](java-nio-buffer.md)
 * [05. Java NIO Scatter / Gather](java-nio-scatter-gather.md)
-* [06. Java NIO Channel to Channel Transfers](java-nio-channel-to-channel-transfers.md)
+* [06. Java NIO Channel to Channel Transfers通道传输接口](java-nio-channel-to-channel-transfers.md)
 * [07. Java NIO Selector](java-nio-selector.md)
 * [08. Java NIO FileChannel](java-nio-filechannel.md)
 * [09. Java NIO SocketChannel](java-nio-socketchannel.md)

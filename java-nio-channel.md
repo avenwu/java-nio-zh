@@ -17,6 +17,7 @@ Java NIO Channel通道和流非常相似，主要有以下几点区别：
 **Java NIO: Channels read data into Buffers, and Buffers write data into Channels**
 
 ## Channel的实现（Channel Implementations）
+
 下面列出Java NIO中最重要的集中Channel的实现：
 
 * FileChannel
@@ -30,7 +31,9 @@ SocketChannel用于TCP的数据读写。
 ServerSocketChannel允许我们监听TCP链接请求，每个请求会创建会一个SocketChannel.
 
 ## Channel的基础示例（Basic Channel Example）
+
 这有一个利用FileChannel读取数据到Buffer的例子：
+
 ```
     RandomAccessFile aFile = new RandomAccessFile("data/nio-data.txt", "rw");
     FileChannel inChannel = aFile.getChannel();
@@ -52,6 +55,7 @@ ServerSocketChannel允许我们监听TCP链接请求，每个请求会创建会�
     }
     aFile.close();
 ```
+
 注意buf.flip()的调用。首先把数据读取到Buffer中，然后调用flip()方法。接着再把数据读取出来。在后续的章节中我们还会讲解先关知识。
 
  

@@ -11,7 +11,9 @@ NIO包含下面几个核心的组件：
   * Selectors
 
 整个NIO体系包含的类远远不止这几个，但是在笔者看来Channel,Buffer和Selector组成了这个核心的API。其他的一些组件，比如Pipe和FileLock仅仅只作为上述三个的负责类。因此在概览这一节中，会重点关注这三个概念。其他的组件会在各自的部分单独介绍。
+
 ## 通道和缓冲区（Channels and Buffers）
+
 通常来说NIO中的所有IO都是从Channel开始的。Channel和流有点类似。通过Channel，我们即可以从Channel把数据写到Buffer中，也可以吧数据冲Buffer写入到Channel，下图是一个示意图：
 
 ![http://tutorials.jenkov.com/images/java-nio/overview-channels-buffers.png](http://tutorials.jenkov.com/images/java-nio/overview-channels-buffers.png)

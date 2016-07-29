@@ -1,4 +1,4 @@
-# 15.Java NIO Path
+# 15.Java NIO Path路径
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/path.html](http://tutorials.jenkov.com/java-nio/path.html)
 

@@ -1,4 +1,4 @@
-# 17. Java NIO AsynchronousFileChannel
+# 17. Java NIO AsynchronousFileChannel异步文件通道
 
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/asynchronousfilechannel.html](http://tutorials.jenkov.com/java-nio/asynchronousfilechannel.html)

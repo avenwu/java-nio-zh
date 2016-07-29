@@ -1,4 +1,4 @@
-# 06. Java NIO Channel to Channel Transfers
+# 06. Java NIO Channel to Channel Transfers通道传输接口
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/channel-to-channel-transfers.html](http://tutorials.jenkov.com/java-nio/channel-to-channel-transfers.html)
 

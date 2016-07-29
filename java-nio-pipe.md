@@ -1,4 +1,5 @@
-# Java NIO Pipe
+# 13.Java NIO Pipe
+
 > 原文链接：[http://tutorials.jenkov.com/java-nio/pipe.html](http://tutorials.jenkov.com/java-nio/pipe.html)
 
 <!-- toc -->
@@ -10,17 +11,23 @@
 ![http://tutorials.jenkov.com/images/java-nio/pipe-internals.png](http://tutorials.jenkov.com/images/java-nio/pipe-internals.png)
 
 ## 创建管道(Creating a Pipe)
+
 打开一个管道通过调用Pipe.open()工厂方法，如下：
+
 ```
 Pipe pipe = Pipe.open();
 ```
 
 ## 向管道写入数据（Writing to a Pipe）
+
 向管道写入数据需要访问他的sink channel：
+
 ```
 Pipe.SinkChannel sinkChannel = pipe.sink();
 ```
+
 接下来就是调用write()方法写入数据了：
+
 ```
 String newData = "New String to write to file..." + System.currentTimeMillis();
 
@@ -36,16 +43,21 @@ while(buf.hasRemaining()) {
 ```
 
 ## 从管道读取数据（Reading from a Pipe）
+
 类似的从管道中读取数据需要访问他的source channel：
+
 ```
 Pipe.SourceChannel sourceChannel = pipe.source();
 ```
+
 接下来调用read()方法读取数据：
+
 ```
 ByteBuffer buf = ByteBuffer.allocate(48);
 
 int bytesRead = inChannel.read(buf);
 ```
+
 注意这里read()的整形返回值代表实际读取到的字节数。
 
 

@@ -1,4 +1,4 @@
-# 03. Java NIO 通道
+# 03. Java NIO Channel通道
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/channels.html](http://tutorials.jenkov.com/java-nio/channels.html)
 

@@ -9,7 +9,7 @@
 * [06. Java NIO Channel to Channel Transfers通道传输接口](java-nio-channel-to-channel-transfers.md)
 * [07. Java NIO Selector选择器](java-nio-selector.md)
 * [08. Java NIO FileChannel文件通道](java-nio-filechannel.md)
-* [09. Java NIO SocketChannel套接字通道](java-nio-socketchannel.md)
+* [09. Java NIO SocketChannel](java-nio-socketchannel.md)
 * [10. Java NIO ServerSocketChannel](java-nio-serversocketchannel.md)
 * [11. Java NIO: Non-blocking Server](java-nio-non-blocking-server.md)
 * [12. Java NIO DatagramChannel](java-nio-datagramchannel.md)

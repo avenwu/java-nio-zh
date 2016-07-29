@@ -1,4 +1,4 @@
-# 04. Java NIO Buffer
+# 04. Java NIO Buffer缓冲区
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/buffers.html](http://tutorials.jenkov.com/java-nio/buffers.html)
 

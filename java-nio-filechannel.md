@@ -1,4 +1,4 @@
-# 08. Java NIO FileChannel
+# 08. Java NIO FileChannel文件通道
 
 
 > 原文链接：[http://tutorials.jenkov.com/java-nio/file-channel.html](http://tutorials.jenkov.com/java-nio/file-channel.html)

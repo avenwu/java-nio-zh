@@ -16,6 +16,6 @@
 * [13. Java NIO Pipe管道](java-nio-pipe.md)
 * [14. Java NIO vs. IO](java-nio-vs-io.md)
 * [15. Java NIO Path路径](java-nio-path.md)
-* [16. Java NIO Files](java-nio-files.md)
+* [16. Java NIO Files文件](java-nio-files.md)
 * [17. Java NIO AsynchronousFileChannel](java-nio-asynchronousfilechannel.md)
 

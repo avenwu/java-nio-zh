@@ -13,6 +13,9 @@
 v1.0 | 2016/05/11
 v1.1 | 2016/07/07
 
+
+在线阅读地址：[http://java-nio.avenwu.net/](http://java-nio.avenwu.net/)
+
 ---
 
 ## 联系

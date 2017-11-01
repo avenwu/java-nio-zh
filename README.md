@@ -12,13 +12,14 @@
 ------------ | -------------
 v1.0 | 2016/05/11
 v1.1 | 2016/07/07
+v1.2 | 2017/11/01
 
 
-在线阅读地址：[http://java-nio.avenwu.net/](http://java-nio.avenwu.net/)
+在线阅读地址：[http://nio.hacktons.cn/](http://nio.hacktons.cn/)
 
 ---
 
 ## 联系
 
 * 作者：<info@jenkov.com>
-* 译者：<me@avenwu.net> @[小文子](https://github.com/avenwu)
+* 译者：<chaobinwu89@gmail.com> @[小文子](https://github.com/avenwu)

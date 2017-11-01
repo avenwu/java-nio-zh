@@ -14,7 +14,7 @@ NIO包含下面几个核心的组件：
 
 ## 通道和缓冲区（Channels and Buffers）
 
-通常来说NIO中的所有IO都是从Channel开始的。Channel和流有点类似。通过Channel，我们即可以从Channel把数据写到Buffer中，也可以吧数据冲Buffer写入到Channel，下图是一个示意图：
+通常来说NIO中的所有IO都是从Channel开始的。Channel和流有点类似。通过Channel，我们即可以从Channel把数据写到Buffer中，也可以把数据冲Buffer写入到Channel，下图是一个示意图：
 
 ![http://tutorials.jenkov.com/images/java-nio/overview-channels-buffers.png](http://tutorials.jenkov.com/images/java-nio/overview-channels-buffers.png)
 
@@ -27,8 +27,8 @@ NIO包含下面几个核心的组件：
   * SocketChannel
   * ServerSocketChannel
 
-正如你看到的，这些channel基于于UPD和TCP的网络IO，以及文件IO。
-和这些类一起的还有其他一些比较有趣的接口，在本节中暂时不多介绍。为了简介起见，我们会在必要的时候引入这些概念。
+正如你看到的，这些channel基于于UDP和TCP的网络IO，以及文件IO。
+和这些类一起的还有其他一些比较有趣的接口，在本节中暂时不多介绍。为了简洁起见，我们会在必要的时候引入这些概念。
 下面是核心的Buffer实现类的列表：
   
   * ByteBuffer
@@ -51,4 +51,4 @@ NIO实际上还包含一种MappedBytesBuffer,一般用于和内存映射的文�
 
 **Java NIO: A Thread uses a Selector to handle 3 Channel's**
 
-要使用Selector的话，我们必须把Channel注册到Selector上，然后就可以调用Selector的selectr()方法。这个方法会进入阻塞，直到有一个channel的状态符合条件。当方法范湖后，线程可以处理这些时间。
+要使用Selector的话，我们必须把Channel注册到Selector上，然后就可以调用Selector的select()方法。这个方法会进入阻塞，直到有一个channel的状态符合条件。当方法返回后，线程可以处理这些事件。
